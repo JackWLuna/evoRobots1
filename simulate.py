@@ -4,7 +4,7 @@ import time as t
 
 physicsClient = p.connect(p.GUI)
 
-pyrosim.Start_SDF("box.sdf")
+
 
 for i in range(1000):
     p.stepSimulation()
