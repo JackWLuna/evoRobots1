@@ -1,10 +1,9 @@
 import pybullet as p
-import pyrosim.pyrosim as pyrosim
 import time as t
 
 physicsClient = p.connect(p.GUI)
 
-
+p.loadSDF("box.sdf")
 
 for i in range(1000):
     p.stepSimulation()

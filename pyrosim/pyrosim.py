@@ -185,6 +185,7 @@ def Start_NeuralNetwork(filename):
 
 def Start_SDF(filename):
 
+
     global availableLinkIndex
 
     availableLinkIndex = -1
@@ -211,6 +212,7 @@ def Start_SDF(filename):
 
     links = []
 
+    
 def Start_URDF(filename):
 
     global availableLinkIndex
