@@ -11,20 +11,28 @@ height0 = 1
 
 x0 = 0
 y0 = 0
-z0 = .5
+z0 = 1.5
+
+def Create_World():
+    pyrosim.Start_SDF("world.sdf")
+
+    pyrosim.Send_Cube(name="Box", pos=[x0-5,y0+10,z0] , size=[length0,width0,height0])
+
+    pyrosim.End()
+
+def Create_Robot():
+    pyrosim.Start_URDF("body.urdf")
+
+    pyrosim.Send_Cube(name="Torso", pos=[x0,y0,z0] , size=[length0,width0,height0])
+
+    pyrosim.Send_Joint( name = "Torso_BackLeg" , parent= "Torso" , child = "BackLeg" , type = "revolute", position = [x0-.5,y0,z0-.5])
+    pyrosim.Send_Cube(name="BackLeg", pos=[-.5,0,-.5] , size=[length0,width0,height0])
+
+    pyrosim.Send_Joint( name = "Torso_FrontLeg" , parent= "Torso" , child = "FrontLeg" , type = "revolute", position = [x0+.5,y0,z0-.5])
+    pyrosim.Send_Cube(name="FrontLeg", pos=[+.5,0,-.5] , size=[length0,width0,height0])
 
 
-pyrosim.Start_SDF("boxes.sdf")
+    pyrosim.End()
 
-def tower(x,y,z):
-    for i in range(10):
-        pyrosim.Send_Cube(name="Box", pos=[x,y,z+(i)] , size=[length0*(.9**i),width0*(.9**i),height0*(.9**i)])
-
-for i in range(25):
-    x_index = i%5
-    y_index = i//5
-
-    tower(x0+x_index,y0+y_index,z0)
-
-
-pyrosim.End()
+Create_Robot()
+Create_World()

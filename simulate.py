@@ -2,12 +2,15 @@ import pybullet as p
 import pybullet_data
 import time as t
 
+GRAV = 10
+
 physicsClient = p.connect(p.GUI)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
 
-p.setGravity(0,0,-9.8)
+p.setGravity(0,0,-9.8*GRAV)
 planeId = p.loadURDF("plane.urdf")
-p.loadSDF("boxes.sdf")
+robotID = p.loadURDF("body.urdf")
+p.loadSDF("world.sdf")
 
 while(True):
     p.stepSimulation()
