@@ -7,6 +7,7 @@ import pybullet as p
 import pybullet_data
 import pyrosim.pyrosim as pyrosim
 
+
 class SIMULATION:
 
     def __init__(self):
@@ -23,9 +24,10 @@ class SIMULATION:
        
     def Run(self):
         for i in range(c.NUM_ITERATIONS):
-            print(i)
+            #print(i)
             p.stepSimulation()
             self.robot.Sense(i)
+            self.robot.Think()
             self.robot.Act(i)
             t.sleep(c.SLEEP_VAL)
 
