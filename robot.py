@@ -48,3 +48,11 @@ class ROBOT:
             
         #for motor in self.motors.values():
             #motor.Set_Value(self.robot,t)
+
+    def Get_Fitness(self):
+        stateOfLinkZero = p.getLinkState(self.robot,0)
+        positionOfLinkZero = stateOfLinkZero[0]
+        xCoordinateOfLinkZero = positionOfLinkZero[0]
+        fitness = open("fitness.txt",'w')
+        fitness.write(str(xCoordinateOfLinkZero))
+        fitness.close()
