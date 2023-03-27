@@ -1,7 +1,7 @@
 import math
 
 GRAV = 5
-NUM_ITERATIONS = 10000
+NUM_ITERATIONS = 100
 SLEEP_VAL = (1.0/144.0)
 
 
