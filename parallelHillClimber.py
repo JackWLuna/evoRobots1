@@ -6,7 +6,7 @@ import constants as c
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
         os.system("del brain*.nndf")
-        os.system("del fitness*.nndf")
+        os.system("del fitness*.txt")
         self.nextAvailableID = 0
         self.parents = {}
         for i in range(c.POPULATION_SIZE):
@@ -66,6 +66,7 @@ class PARALLEL_HILL_CLIMBER:
                 max_fit_key = key
                 max_fit = self.parents[key].fitness
         self.parents[max_fit_key].Start_Simulation("GUI")
+        
 
     def Evolve(self):
         self.Evaluate(self.parents)
