@@ -10,19 +10,19 @@ import pyrosim.pyrosim as pyrosim
 
 class SIMULATION:
 
-    def __init__(self, direct_or_GUI):
-        
+    def __init__(self, direct_or_GUI,id):
+        self.run_type = direct_or_GUI
         if(direct_or_GUI == "DIRECT"):
             self.physicsClient = p.connect(p.DIRECT)
-            self.sleep_val = 0
+    
         else:
             self.physicsClient = p.connect(p.GUI)
-            self.sleep_val = c.SLEEP_VAL
+    
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(0,0,-9.8*c.GRAV)
 
         self.world = WORLD()
-        self.robot = ROBOT()
+        self.robot = ROBOT(id)
 
     def __del__(self):
 
@@ -35,7 +35,9 @@ class SIMULATION:
             self.robot.Sense(i)
             self.robot.Think()
             self.robot.Act(i)
-            t.sleep(self.sleep_val)
+
+            if(self.run_type == "GUI"):
+                t.sleep(c.SLEEP_VAL)
 
     def Get_Fitness(self):
         self.robot.Get_Fitness()

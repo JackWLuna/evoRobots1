@@ -1,3 +1,4 @@
+import time
 import numpy as np
 import random
 import constants
@@ -14,21 +15,36 @@ z0 = 1.5
 
 
 class SOLUTION:
-    def __init__(self):
+    def __init__(self, nextAvailableID):
+        self.my_id = nextAvailableID
         self.weights = np.random.rand(3,2)
         self.weights = (self.weights * 2)  - 1
 
+    def Set_ID(self,id):
+        self.my_id = id
+
     def Evaluate(self, run_type):      
+        pass
+
+       
+
+    def Start_Simulation(self, run_type):
         self.Create_World()
         self.Generate_Body()
         self.Generate_Brain()
 
+        while not os.path.exists("brain" + str(self.my_id)+ ".nndf"):
+            time.sleep(0.01)
+        os.system("start /B python3 simulate.py " + run_type + " " + str(self.my_id))
 
-        os.system("python3 simulate.py "+run_type)
-
-        fitness_record = open("fitness.txt",'r')
+    def Wait_For_Simulation_To_End(self):
+        while not os.path.exists("fitness" + str(self.my_id)+ ".txt"):
+            time.sleep(0.01)
+        fitness_record = open("fitness" + str(self.my_id)+ ".txt",'r')
         self.fitness = float(fitness_record.read())
         fitness_record.close()
+        os.system("del fitness" + str(self.my_id)+ ".txt")
+        #print("Fitness for id " + str(self.my_id)+ " is: " + str(self.fitness))
 
     def Create_World(self):
         pyrosim.Start_SDF("world.sdf")
@@ -56,7 +72,7 @@ class SOLUTION:
 
 
     def Generate_Brain(self):
-        pyrosim.Start_NeuralNetwork("brain.nndf")
+        pyrosim.Start_NeuralNetwork("brain"+str(self.my_id)+".nndf")
 
         pyrosim.Send_Sensor_Neuron(name = 0 , linkName = "Torso")
         pyrosim.Send_Sensor_Neuron(name = 1 , linkName = "BackLeg")
