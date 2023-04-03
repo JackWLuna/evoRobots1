@@ -54,12 +54,15 @@ class ROBOT:
             #motor.Set_Value(self.robot,t)
 
     def Get_Fitness(self):
-        stateOfLinkZero = p.getLinkState(self.robot,0)
-        positionOfLinkZero = stateOfLinkZero[0]
-        xCoordinateOfLinkZero = positionOfLinkZero[0]
+        #stateOfLinkZero = p.getLinkState(self.robot,0)
+        basePositionAndOrientation = p.getBasePositionAndOrientation(self.robot)
+        #positionOfLinkZero = stateOfLinkZero[0]
+        basePosition = basePositionAndOrientation[0]
+        #xCoordinateOfLinkZero = positionOfLinkZero[0]
+        xPosition = basePosition[0]
         #fitness = open("fitness" + str(self.my_id)+ ".txt",'w')
         fitness = open("tmp" + str(self.my_id)+ ".txt",'w')
-        fitness.write(str(xCoordinateOfLinkZero))
+        fitness.write(str(xPosition))
         fitness.close()
         os.rename("tmp"+str(self.my_id)+".txt" , "fitness"+str(self.my_id)+".txt")
         #os.system("rename tmp" + str()+ ".txt fitness" + str(self.my_id)+ ".txt")
