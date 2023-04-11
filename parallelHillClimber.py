@@ -6,6 +6,7 @@ import constants as c
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
         os.system("del brain*.nndf")
+        os.system("del world*.sdf")
         os.system("del fitness*.txt")
         self.nextAvailableID = 0
         self.parents = {}
@@ -30,7 +31,7 @@ class PARALLEL_HILL_CLIMBER:
     def Select(self):
 
         for key in self.parents:
-            if(self.parents[key].fitness>self.children[key].fitness):
+            if(self.parents[key].fitness<self.children[key].fitness):
                 self.parents[key] = self.children[key]
 
     def Print(self):
@@ -55,16 +56,17 @@ class PARALLEL_HILL_CLIMBER:
 
         self.Evaluate(self.children)
         
-        self.Print()
+        #self.Print()
         self.Select()
 
     def Show_Best(self):
         max_fit_key = 0
         max_fit = 0
         for key in self.parents:
-            if(self.parents[key].fitness < max_fit):
+            if(self.parents[key].fitness > max_fit):
                 max_fit_key = key
                 max_fit = self.parents[key].fitness
+        print("\n\n\n--------MAX FITNESS: ", max_fit,"\n\n\n")
         self.parents[max_fit_key].Start_Simulation("GUI")
         
 

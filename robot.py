@@ -10,12 +10,13 @@ class ROBOT:
 
     def __init__(self,id):
         self.my_id = id
-        self.robot = p.loadURDF("body.urdf")
+        self.robot = p.loadURDF("body" + str(self.my_id)+ ".urdf")
         pyrosim.Prepare_To_Simulate(self.robot)
         self.Prepare_To_Sense()
         self.nn = NEURAL_NETWORK("brain"+str(id)+".nndf")
         self.Prepare_To_Act()
         os.system("del " + "brain"+str(id)+".nndf")
+        os.system("del " + "body"+str(id)+".urdf")
         
         
 
@@ -59,10 +60,14 @@ class ROBOT:
         #positionOfLinkZero = stateOfLinkZero[0]
         basePosition = basePositionAndOrientation[0]
         #xCoordinateOfLinkZero = positionOfLinkZero[0]
-        xPosition = basePosition[0]
+        yPosition = basePosition[1]
+        zPosition = basePosition[2]
+        fit = yPosition*zPosition
+        if(yPosition<0 and zPosition<0):
+            fit = -fit
         #fitness = open("fitness" + str(self.my_id)+ ".txt",'w')
         fitness = open("tmp" + str(self.my_id)+ ".txt",'w')
-        fitness.write(str(xPosition))
+        fitness.write(str(fit))
         fitness.close()
         os.rename("tmp"+str(self.my_id)+".txt" , "fitness"+str(self.my_id)+".txt")
         #os.system("rename tmp" + str()+ ".txt fitness" + str(self.my_id)+ ".txt")
