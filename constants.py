@@ -19,6 +19,6 @@ PHASE2 = math.pi/4
 NUM_GENERATIONS = 20
 POPULATION_SIZE = 25
 
-num_sensor_neurons = 15
-num_motor_neurons = 13
+num_sensor_neurons = 8
+num_motor_neurons = 7
 motorJointRange = math.pi/2
