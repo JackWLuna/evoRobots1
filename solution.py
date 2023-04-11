@@ -87,10 +87,10 @@ class SOLUTION:
         pyrosim.Send_Cube(name="RightThigh", pos=[0,0,-.5] , size=[.25,.25,1])
 
         pyrosim.Send_Joint( name = "LeftThigh_LeftCalf" , parent= "LeftThigh" , child = "LeftCalf" , type = "revolute", position = [0,0,-1], jointAxis="1 0 0")
-        pyrosim.Send_Cube(name="LeftCalf", pos=[0,0,-.5] , size=[.25,.25,1])
+        pyrosim.Send_Cube(name="LeftCalf", pos=[0,0,-.5] , size=[.5,.5,1])
 
         pyrosim.Send_Joint( name = "RightThigh_RightCalf" , parent= "RightThigh" , child = "RightCalf" , type = "revolute", position = [0,0,-1], jointAxis="1 0 0")
-        pyrosim.Send_Cube(name="RightCalf", pos=[0,0,-.5] , size=[.25,.25,1])
+        pyrosim.Send_Cube(name="RightCalf", pos=[0,0,-.5] , size=[.5,.5,1])
 
         pyrosim.Send_Joint( name = "Torso_LeftShoulder" , parent= "Torso" , child = "LeftShoulder" , type = "revolute", position = [x0-0.5,y0,z0+1], jointAxis="0 0 1")
         pyrosim.Send_Cube(name="LeftShoulder", pos=[0,0,0] , size=[.25,.25,.25])
